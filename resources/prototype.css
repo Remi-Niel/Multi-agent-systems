@@ -1,0 +1,66 @@
+.row.content {height: 1500px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+	background-color: #f1f1f1;
+	height: 100%;
+	padding-top:20px;
+}
+
+.story_box {
+	background-color: #f1f1f1;
+	height: auto;
+	padding-top: 20px;
+	max-width: 400;
+	font-size:14px;
+
+}
+
+h2 {
+	padding-top:10px;
+	padding-bottom:5px;
+	font-size:40px;
+}
+h4 {
+	padding-top:10px;
+	padding-bottom:5px;
+}
+h5 {
+	padding-top:5px;
+	padding-bottom:0px;
+	font-size:15px;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+	background-color: #555;
+	color: white;
+	padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+	.sidenav {
+		height: auto;
+		padding: 15px;
+	}
+	.row.content {height: auto;} 
+}
+
+#mynetwork {
+	background-color: white;
+	/*width: 90%;*/
+	height: 800px;
+	border: 1px solid lightgray;
+}
+
+body {
+  background-color: #f1f1f1;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Charlie's Birthday</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+	<script type="text/javascript" src="resources/vis.js"></script>
+	<link href="resources/vis-network.min.css" rel="stylesheet" type="text/css" />
+	<link href="resources/prototype.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript" src="resources/katex.min.js"></script>
+	<link href="resources/katex.min.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="resources/pseudocode.min.js"></script>
+	<link href="resources/pseudocode.min.css" rel="stylesheet" type="text/css" />
+
+	<link href="resources/prototype.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+
+<div class="container-fluid">
+
+	<!-- Static navbar -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+		  <div class="navbar-header">
+		    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		      <span class="sr-only">Toggle navigation</span>
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>
+		    </button>
+		    <a class="navbar-brand" href="#">Charlie's Birthday</a>
+		  </div>
+		  <div id="navbar" class="navbar-collapse collapse">
+		    <ul class="nav navbar-nav">
+		      <li class="active"><a href="report.html">Report</a></li>
+		      <li><a href="prototype.html">Program</a></li>
+		    </ul>
+		  </div><!--/.nav-collapse -->
+		</div><!--/.container-fluid -->
+	</nav>
+	<div class="row content">
+		<div class="col-sm-3 sidenav">
+		</div>
+		<div class="col-sm-6 story_box">
+			<h2>Intro</h2>
+			<p>
+				In this project the problem "Charlie's Birthday" was implemented. Charlie's birthday is a riddle which needs to be solved by 3 people (Albert, Bernard and Cheryl). Charlie will give a number of dates, where one of the dates is his birthday, which is unknown to the other 3 people. He then tells Albert what the month is, Bernard what the day is, and Cheryl what the year is. Every person knows what kind of information the other people got. They then need to find out what Charlie's birthday is without explicitly saying the day, month or year.<br />
+
+				The way this riddle is solved is by making use of unique days, months or years in the list of dates. To explain this we will use the example with the following dates:
+			</p>
+			<ul>
+				<li>Apr 14, 1999</li> 
+				<li>Feb 19, 2000</li> 
+				<li>Mar 14, 2000</li> 
+				<li>Mar 15, 2000</li>  
+				<li>Apr 15, 2000</li>
+				<li>Apr 16, 2000</li> 
+				<li>Feb 15, 2001</li> 
+				<li>Mar 15, 2001</li> 
+				<li>Apr 14, 2001</li> 
+				<li>Apr 16, 2001</li> 
+				<li>May 14, 2001</li> 
+				<li>May 16, 2001</li> 
+				<li>May 17, 2001</li> 
+				<li>Feb 17, 2002</li>
+			</ul>
+			<p>
+				The correct birthday is Apr 16, 2000 in this case. The first situation is when Albert knows the month, Bernard the day and Cheryl the year. It can be seen that there are several dates with a unique day or year, namely Feb 19, 2000, Apr 14, 1999, and Feb 17, 2002. In this case there are several possibilities to reduce the model.<br />
+				The first possibility is using the date with the unique day, Feb 19, 2000. Albert knows that February is not the correct month so he knows that Bernard doesn't know the solution. Bernard can state the following in this case: "I don't know Charlie's birthday, but neither does Bernard". By making this statement he announces that he knows Feb 19, 1999 is the incorrect date and the other two people know that he only knows the correct month. This means that by making this statement, he lets the other two people know that February is not the correct month, so the model can be reduced to a state where the month February doesn't occur anymore. This means we arrive at:
+			</p>
+			<ul>
+				<li>Apr 14, 1999</li>
+				<li>Mar 14, 2000</li> 
+				<li>Mar 15, 2000</li> 
+				<li>Apr 15, 2000</li> 
+				<li>Apr 16, 2000</li> 
+				<li>Mar 15, 2001</li> 
+				<li>Apr 14, 2001</li> 
+				<li>Apr 16, 2001</li> 
+				<li>May 14, 2001</li> 
+				<li>May 16, 2001</li> 
+				<li>May 17, 2001</li>
+			</ul>
+			<p>
+				The second possibility is using the dates with the unique years, Apr 14, 1999, and Feb 17, 2002. Bernard knows that both of these dates are not possible, since the day is incorrect and thus knows that Cheryl doesn't know the birthday. If he makes the statement: "I don't know Charlie's birthday, but neither does Cheryl", he lets the other two people know that both Apr 14, 1999, and Feb 17, 2002 are incorrect. Since Bernard only knows the day, this means that every date with the day 14 or 17 is not the correct day, so the model can be reduced to:
+			</p>
+			<ul>
+				<li>Feb 19, 2000</li> 
+				<li>Mar 15, 2000</li>  
+				<li>Apr 15, 2000</li>
+				<li>Apr 16, 2000</li> 
+				<li>Feb 15, 2001</li> 
+				<li>Mar 15, 2001</li> 
+				<li>Apr 16, 2001</li> 
+				<li>May 16, 2001</li>
+			</ul>
+
+			<p>
+			This situation introduces one of the problems in solving this riddle. At some moments there is more than one reduction possible, which lead to different models. Even though there are multiple valid reductions, not every reduction will lead to a model in which it is possible to make another reduction. This means that to solve this riddle, a decision tree needs to be made. In order to reach a solution a certain path might be needed, so it is necessary to explore different reductions of the model to be able to find solutions.
+			</p>
+
+			<h2>Theory</h2>
+				<p>
+				There are several possible ways to reduce the model, depending on the available information. For every reduction at least one date with a unique property is needed.<br />
+				A person can say: "I know the date", in which case all dates are removed which do not have a unique day, month or year depending on which the person got from Charlie. This is because a person can only know the date if the property he was told by Charlie is unique, hence all non-unique ones are removed from the possible dates.<br />
+				A person can also say: "I don't know the date" in which case all dates are removed which do have a unique day, month or year depending on which the person got from Charlie. This is because a person can only not know the date if the property he was given by Charlie is not unique, hence all dates with a unique property are removed.<br />
+				Finally a person X can state: "Y does not know the birthday". Lets assume X knows the day and Y the month. In this case all dates with a unique month are removed from the possible dates. But additionally since X knows that Y does not know, it follows that every date with a unique month has day which is not the correct day. Hence all dates are removed which share a day with one or more date which have unique months. This works in the same way if X and Y have were given other information by Charlie.<br />
+				So given a set of dates, person X can say "I know the date" iff his given property by Charlie is unique. Person X can say "I do not know the date" iff the given property by Charlie is not unique. Finally person X can say "person Y does not know the date" iff for every date with an unique property of the type given to person Y by Charlie, person X knows it to be false i.e. the property given to person X by Charlie does not correspond with the date. 
+			</p>
+
+			<h2>Implementation</h2>
+			
+			
+			
+			<pre id="hello-world-code" style="display:none;">
+				\begin{algorithm}
+					\caption{DeterminePath}
+					\begin{algorithmic}
+						\PROCEDURE{determinePath}{$dates$}
+							\STATE $bestPath$=$[dates]$
+							\STATE $answer$=dates[0]
+							\STATE
+							\IF{$dates.length == 0$}
+								\STATE return []
+							\ENDIF
+							\STATE
+							\IF{$dates.length == 1$}
+								\STATE return dates
+							\ENDIF
+							\STATE uniqueDates=[]
+							\STATE $uniqueDates[0]=getDatesWithUniqueMonth(dates)$
+							\STATE $uniqueDates[1]=getDatesWithUniqueDay(dates)$
+							\STATE $uniqueDates[2]=getDatesWithUniqueYear(dates)$
+							\STATE
+
+
+							\FOR{$i =0$ \TO $2$}
+								\IF{$uniqueDates[i].length==1$}
+									\STATE return [dates,uniqueDates[i]]
+								\ENDIF
+								\STATE
+								\IF{$uniqueDates[i].length>1$}
+									\IF{$answer\in uniqueDates[i]$}
+										\STATE $path$=determinePath($uniqueDates[i]$)
+										\IF{$path$.last.length==1}
+											\STATE return $[dates]+path$
+										\ELSEIF{$path$.last.length>1 \AND $path$.last.length<$bestPath$.last.length}
+											\STATE $bestPath$= $[dates]+path$
+										\ENDIF
+									\ENDIF
+
+									\FOR{$type=0$ \TO $2$}
+										\IF{$reducibleOnType(uniqueDates[i],dates,type)$}
+											\STATE $path$=determinePath(reduceDates(uniqueDates[i],dates,type))
+											\IF{$path$.last.length==1}
+												\STATE return $[dates]+path$
+											\ELSEIF{$path$.last.length>1 \AND $path$.last.length<$bestPath$.last.length}
+												\STATE $bestPath$= $[dates]+path$
+											\ENDIF
+										\ENDIF
+									\ENDFOR
+								\ENDIF
+							\ENDFOR
+							\STATE
+							\STATE return $bestPath$
+						\ENDPROCEDURE
+					\end{algorithmic}
+				\end{algorithm}
+			</pre>
+			
+			<div id="out">
+			</div>
+			<p>
+				The problem we solve is inherently recursive, given a set of dates we need to reduce it until a base case is found: only one date remains, or no further reductions are possible.
+				Because of this we used recursion in order to explore all possible reductions of the model. If a solution is found, a list will be returned which contains every intermediary model, leading to the solution. For convenience in coding, we assume that the first given date in the list is the birthday.
+			</p>
+
+			<h2>Models</h2>
+			<p>
+				Kripke models are constructed to show the possible worlds and the relations between the worlds. We use the theory of distributed systems to model the problem: initially each person cannot distinguish dates from each other if the day, month or year are the same (depending on which was given by Charlie), however note that if more information is provided by the others the person might be able to distinguish between dates it could not previously. There are connections between worlds that a person cannot distinguish between. Some worlds that are still present in the model are not considered to be correct by any of the three people, but this does not mean that they know that none of the other people still see that world as a possible solution.
+
+			<h2>How to use</h2>
+			<p>
+				To use our program, click on the program tab. The first screen that is shown asks you to submit a list of dates. There is also the option to use the default problem, which is given in the intro. The first given date in the list will be considered as the birthday. When a list of dates is made, you can choose submit, which will bring you to the next screen showing the Kripke model of the first state. You can cycle through the different steps to the solution by clicking "Previous" and "Next". At each step, an explanation will be shown at the top which explains the reduction of the model from the previous state to the current one. If there is no solution to the problem, the program will reduce the model to the smallest state.
+			</p>
+
+		</div>
+		<div class="col-sm-3 sidenav">
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+var code = document.getElementById("hello-world-code").textContent;
+var parentEl = document.getElementById("out");
+parentEl.innerHTML="";
+var options = {
+    lineNumber: true
+};
+pseudocode.render(code, parentEl, options);
+</script>
+</body>
+
+
+<footer class="container-fluid">
+	<p>Multi Agent Systems 2018<br> Cornel Kuiper, Yiebo Chong, Remi Niël
+	</p>
+</footer>
+
+</html>

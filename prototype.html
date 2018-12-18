@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Charlie's Birthday</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+	<script type="text/javascript" src="resources/vis.js"></script>
+	<link href="resources/vis-network.min.css" rel="stylesheet" type="text/css" />
+	<link href="resources/prototype.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+
+<div class="container-fluid">
+
+	<!-- Static navbar -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+		  <div class="navbar-header">
+		    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		      <span class="sr-only">Toggle navigation</span>
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>
+		      <span class="icon-bar"></span>
+		    </button>
+		    <a class="navbar-brand" href="#">Charlie's Birthday</a>
+		  </div>
+		  <div id="navbar" class="navbar-collapse collapse">
+		    <ul class="nav navbar-nav">
+		      <li><a href="index.html">Report</a></li>
+		      <li class="active"><a href="#">Program</a></li>
+		    </ul>
+		  </div><!--/.nav-collapse -->
+		</div><!--/.container-fluid -->
+	</nav>
+	<div class="row content">
+		<div class="col-sm-1 sidenav">
+			<h4>Dates</h4>
+			<ul id="dates_" class="nav nav-pills nav-stacked"></ul>
+			<br>
+		</div>
+
+
+		<div class="col-sm-11 story_box">
+			<div class="row">
+				<div class="col-sm-4">
+					<div id="submit_dates">
+						<h4>Submit</h4>
+						<p><small>Note that the first date in the list is assumed to be the birthdate.</small></p>
+						<input type="date" id="date_input" value="1987-11-16">
+						<input type="button" id="add" onclick="add_date()" value="add date"> 
+						<input type="button" id="default" onclick="initDefault()" value="default"> 
+						<input type="button" id="reset" onclick="resetList()" value="clear"> 
+						<input type="button" id="submit" onclick="submit()" value="submit"> 
+					</div>
+					<div id="story_steps" style="display:none">
+						<h5>Story</h5>
+						<input type="button" onclick="previousSet(6)" value="Previous"> 
+						<input type="button" onclick="nextSet(6)" value="Next">
+						<p id="story"></p>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<h4>Current Knowledge</h4>
+					<ul id="knowledge_"class="nav nav-pills nav-stacked"></ul>
+				</div>
+				<div class="col-sm-5">
+					<h4>Model</h4>
+					<ul>
+					<li>The green node represents the correct date.</li> 
+					<li>Blue nodes represent dates at least one person still holds as a possible answer.</li> 
+					<li>Red dates are deemed incorrect by everyone, however someone still holds it possible: that someone else holds it possible that the red dates are the correct date.</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="mynetwork" class="col-sm-11">
+			<script type="text/javascript" src="resources/model.js"></script> 
+		</div>
+	</div>
+</div>
+</body>
+
+
+<footer class="container-fluid">
+	<p>Multi Agent Systems 2018<br> Cornel Kuiper, Yiebo Chong, Remi Niël
+	</p>
+</footer>
+
+</html>
